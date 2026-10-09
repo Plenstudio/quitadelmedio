@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¡Quita del medio! · El idle de sartenazos</title>
+<meta name="description" content="¡Aparta a sartenazos a la gente que se para en medio! El juego idle más gracioso para Android. Un juego de Buski87.">
+<link rel="icon" href="img/icono.png">
+<meta property="og:title" content="¡Quita del medio!">
+<meta property="og:description" content="¡Aparta a sartenazos a la gente que se para en medio!">
+<meta property="og:image" content="img/destacada_es.png">
+<style>
+  :root {
+    --sun: #ffd447; --sun2: #ffe27a; --orange: #e8833a; --ink: #2b1d2e; --text: #2b1d2e;
+    --muted: #5d4f60; --card: #fffaf0; --line: #2b1d2e;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; color: var(--text); font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--sun) repeating-conic-gradient(from 0deg at 50% 0%, var(--sun) 0deg 10deg, var(--sun2) 10deg 20deg);
+    background-attachment: fixed;
+  }
+  html, body { overflow-x: hidden; }
+  .hero > *, .grid > * { min-width: 0; }
+  a { color: inherit; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; }
+  nav .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; text-decoration: none; }
+  nav .brand img { width: 40px; height: 40px; border-radius: 10px; border: 3px solid var(--ink); }
+  .lang { display: flex; gap: 6px; }
+  .lang button {
+    font: inherit; font-weight: 700; border: 3px solid var(--ink); background: #fff; color: var(--ink);
+    border-radius: 999px; padding: 2px 14px; cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] { background: var(--orange); color: #fff; }
+  .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; padding: 32px 0 48px; }
+  .title {
+    font-size: clamp(2.6rem, 7vw, 4.6rem); line-height: 1.02; margin: 0; color: var(--orange); font-weight: 900;
+    -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill; text-shadow: 0 6px 0 rgba(43, 29, 46, .25);
+  }
+  .tagline { font-size: 1.3rem; font-weight: 700; margin: 16px 0 24px; }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #fff; text-decoration: none;
+    border-radius: 14px; padding: 12px 22px; font-weight: 800; border: 3px solid var(--ink);
+  }
+  .btn small { display: block; font-size: .75rem; font-weight: 600; opacity: .8; }
+  .btn.alt { background: #fff; color: var(--ink); }
+  .feature-img { width: 100%; border: 4px solid var(--ink); border-radius: 20px; box-shadow: 0 10px 0 rgba(43, 29, 46, .2); display: block; }
+  section { margin: 0 0 56px; }
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 2.4rem); text-align: center; margin: 0 0 20px; color: #fff; font-weight: 900;
+    -webkit-text-stroke: 2px var(--ink); paint-order: stroke fill;
+  }
+  .gallery { display: flex; gap: 16px; overflow-x: auto; padding: 8px 4px 20px; scroll-snap-type: x mandatory; }
+  .gallery img {
+    width: 230px; flex: 0 0 auto; border-radius: 16px; border: 4px solid var(--ink); scroll-snap-align: center;
+    background: #fff;
+  }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card {
+    background: var(--card); border: 3px solid var(--line); border-radius: 18px; padding: 18px 20px;
+    box-shadow: 0 6px 0 rgba(43, 29, 46, .15);
+  }
+  .card h3 { margin: 0 0 6px; font-size: 1.15rem; }
+  .card p { margin: 0; color: var(--muted); }
+  .emoji { font-size: 1.8rem; line-height: 1; margin-bottom: 8px; }
+  .story { max-width: 720px; margin: 0 auto; text-align: center; font-size: 1.1rem; }
+  footer { background: var(--ink); color: #f4eef6; padding: 28px 0; text-align: center; font-size: .95rem; }
+  footer a { color: var(--sun); }
+  footer .links { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin-bottom: 8px; }
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; text-align: center; padding-top: 12px; }
+    .cta { justify-content: center; }
+    .grid { grid-template-columns: 1fr; }
+    .gallery img { width: 200px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#"><img src="img/icono.png" alt=""><span>¡Quita del medio!</span></a>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1 class="title" data-es="¡Quita del medio!" data-en="Out of My Way!">¡Quita del medio!</h1>
+      <p class="tagline" data-es="¡Aparta a sartenazos a la gente que se para en medio! El idle más gracioso."
+         data-en="Clear everyone who stops in your way with a frying pan! The funniest idle game.">¡Aparta a sartenazos a la gente que se para en medio! El idle más gracioso.</p>
+      <div class="cta">
+        <a class="btn" href="#" aria-disabled="true">
+          <span>▶</span>
+          <span><small data-es="Próximamente en" data-en="Coming soon to">Próximamente en</small>Google Play</span>
+        </a>
+        <a class="btn alt" href="#capturas" data-es="Ver capturas" data-en="See screenshots">Ver capturas</a>
+      </div>
+    </div>
+    <img class="feature-img" id="feature" src="img/destacada_es.png" alt="¡Quita del medio!">
+  </header>
+
+  <section id="capturas">
+    <h2 data-es="Así se juega" data-en="How it plays">Así se juega</h2>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <section>
+    <h2 data-es="Qué te espera" data-en="What awaits you">Qué te espera</h2>
+    <div class="grid">
+      <div class="card"><div class="emoji">🍳</div>
+        <h3 data-es="Sartenazos sin parar" data-en="Non-stop pan smacks">Sartenazos sin parar</h3>
+        <p data-es="Mari ataca sola. Mejora su fuerza y compra sartenes cada vez más bestias: wok, paellera, de oro…"
+           data-en="Mari attacks on her own. Upgrade her and buy wilder pans: wok, paella pan, golden…">Mari ataca sola. Mejora su fuerza y compra sartenes cada vez más bestias: wok, paellera, de oro…</p></div>
+      <div class="card"><div class="emoji">🐱</div>
+        <h3 data-es="Habilidades disparatadas" data-en="Ridiculous skills">Habilidades disparatadas</h3>
+        <p data-es="Lanza al gato, pide ayuda a un niño y un bebé, la zapatilla de la vecina, tartas en la cara…"
+           data-en="Throw the cat, call a kid and a baby for help, the neighbor's slipper, pies to the face…">Lanza al gato, pide ayuda a un niño y un bebé, la zapatilla de la vecina, tartas en la cara…</p></div>
+      <div class="card"><div class="emoji">🏙️</div>
+        <h3 data-es="10 zonas" data-en="10 areas">10 zonas</h3>
+        <p data-es="Calle Mayor, mercado, metro, supermercado, parque, playa, estación de tren, fiesta del pueblo, aeropuerto…"
+           data-en="Main Street, market, subway, supermarket, park, beach, train station, village party, airport…">Calle Mayor, mercado, metro, supermercado, parque, playa, estación de tren, fiesta del pueblo, aeropuerto…</p></div>
+      <div class="card"><div class="emoji">🏢</div>
+        <h3 data-es="Jefes que todos conocemos" data-en="Bosses we all know">Jefes que todos conocemos</h3>
+        <p data-es="Los vecinos de cada piso, el administrador de la finca y su derrama, la encargada de caja, tu cuñado…"
+           data-en="The neighbors on every floor, the building manager and his fees, the checkout supervisor, your brother-in-law…">Los vecinos de cada piso, el administrador de la finca y su derrama, la encargada de caja, tu cuñado…</p></div>
+      <div class="card"><div class="emoji">⭐</div>
+        <h3 data-es="Siempre algo nuevo" data-en="Always something new">Siempre algo nuevo</h3>
+        <p data-es="Misiones diarias, nuevas protagonistas, delantales con bonus y mudanzas de barrio para llegar más lejos."
+           data-en="Daily missions, new heroes, aprons with bonuses and neighborhood moves to go further.">Misiones diarias, nuevas protagonistas, delantales con bonus y mudanzas de barrio para llegar más lejos.</p></div>
+      <div class="card"><div class="emoji">👨‍👩‍👧</div>
+        <h3 data-es="Para toda la familia" data-en="For the whole family">Para toda la familia</h3>
+        <p data-es="Humor blanco, sin registro y sin conexión. Los anuncios solo salen si tú quieres una recompensa."
+           data-en="Wholesome humor, no sign-up, plays offline. Ads only show if you want a reward.">Humor blanco, sin registro y sin conexión. Los anuncios solo salen si tú quieres una recompensa.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-es="De dónde sale" data-en="Where it comes from">De dónde sale</h2>
+    <div class="card story">
+      <p data-es="Nació de una broma familiar: siempre que vas a algún sitio, la gente se para de golpe o se queda en medio… y apartarla con una sartén lo arreglaría todo. Así que hicimos el juego."
+         data-en="It was born from a family joke: wherever you go, people stop dead or stand right in the middle… and moving them aside with a frying pan would fix everything. So we made the game.">Nació de una broma familiar: siempre que vas a algún sitio, la gente se para de golpe o se queda en medio… y apartarla con una sartén lo arreglaría todo. Así que hicimos el juego.</p>
+      <p><strong data-es="Un juego de Buski87" data-en="A game by Buski87">Un juego de Buski87</strong></p>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="links">
+    <a href="privacidad.html" data-es="Política de privacidad" data-en="Privacy policy">Política de privacidad</a>
+    <a href="mailto:buski1987@gmail.com" data-es="Contacto" data-en="Contact">Contacto</a>
+  </div>
+  <div>© 2026 Buski87 · Plenstudio</div>
+</footer>
+
+<script>
+  const SHOTS = ["1_calle", "2_gato", "3_vecina", "4_tarta", "5_ayuda", "6_jefes"];
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-" + lang + "]").forEach(el => { el.textContent = el.dataset[lang]; });
+    document.querySelectorAll("[data-set-lang]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.setLang === lang)));
+    document.getElementById("feature").src = "img/destacada_" + lang + ".png";
+    document.getElementById("gallery").innerHTML = SHOTS
+      .map(s => '<img loading="lazy" src="img/' + lang + '/' + s + '.png" alt="">').join("");
+    document.title = lang === "es" ? "¡Quita del medio! · El idle de sartenazos" : "Out of My Way! · The frying pan idle game";
+    try { localStorage.setItem("lang", lang); } catch (e) {}
+  }
+  document.querySelectorAll("[data-set-lang]").forEach(b => b.addEventListener("click", () => setLang(b.dataset.setLang)));
+  let start = "es";
+  try { start = localStorage.getItem("lang") || (navigator.language.startsWith("es") ? "es" : "en"); } catch (e) {}
+  setLang(start);
+</script>
+</body>
+</html>
